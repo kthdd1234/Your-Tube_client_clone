@@ -1,0 +1,1 @@
+console.log('배고프다')
