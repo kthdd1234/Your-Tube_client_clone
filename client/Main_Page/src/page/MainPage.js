@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 
 import VideoList from "../page/VideoList";
@@ -14,11 +15,13 @@ class MainPage extends React.Component {
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSearchData = this.handleSearchData.bind(this);
   }
+
   UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       YouTubeData: nextProps.YouTubeVideos,
     });
   }
+
   handleInputValue(e) {
     const { value } = e.target;
     this.setState({
@@ -27,6 +30,7 @@ class MainPage extends React.Component {
   }
 
   handleSearchData(e) {
+    e.preventDefault();
     const { searchKeyword } = this.state;
     const { YouTubeVideos } = this.props;
 
@@ -39,6 +43,7 @@ class MainPage extends React.Component {
 
   render() {
     const { YouTubeData } = this.state;
+    console.log("Receive Server Data: ", YouTubeData);
     return (
       <div>
         <center>

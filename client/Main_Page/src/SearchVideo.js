@@ -1,12 +1,18 @@
 export const searchVideo = (keyword, YouTubeData, callback) => {
   let filterVideos = [];
+  keyword = keyword.replace(/(\s*)/g, "");
 
-  for (let video of YouTubeData) {
-    for (let key in video) {
-      if (typeof video[key] !== "number") {
-        if (video[key].includes(keyword)) {
-          filterVideos.push(video);
-        }
+  for (const video of YouTubeData) {
+    const { title, description, channelId } = video;
+    const searchKeyword = {
+      title: title.replace(/(\s*)/g, ""),
+      description: description.replace(/(\s*)/g, ""),
+      channelId: channelId.replace(/(\s*)/g, ""),
+    };
+
+    for (let key in searchKeyword) {
+      if (searchKeyword[key].includes(keyword)) {
+        filterVideos.push(video);
       }
     }
   }
@@ -21,6 +27,7 @@ export const searchVideo = (keyword, YouTubeData, callback) => {
     });
   }
   filterVideos = deleteSameData(filterVideos);
+
   console.log(filterVideos);
   return callback(filterVideos);
 };
