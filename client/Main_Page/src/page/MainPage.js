@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable jsx-a11y/alt-text */ ////
 import React from "react";
 
 import VideoList from "../page/VideoList";
