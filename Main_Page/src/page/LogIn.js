@@ -19,6 +19,7 @@ export default class Oauth extends Component {
         console.log(res);
         this.props.handleSendPropsToLogin();
         //return window.location.href('/'); // 리액트 라우터 구현 후, this.props.history.push('/유저페이지')로 변경하세요
+        //맨날 브랜치 만드는거 까먹음. 귀찮음.
       })
       .catch((err) => {
         console.log(err);
