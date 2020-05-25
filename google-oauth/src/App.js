@@ -31,7 +31,7 @@ export default class App extends Component {
         <GoogleLogin
           type='button'
           buttonText='Login'
-          clientId='378242754412-19sv1la59k4s4krsq3koggliu94lkk84.apps.googleusercontent.com' // your client ID
+          clientId='' // your client ID
           onSuccess={this.handleAuthSuccess}
           onFailure={this.handleAuthFailure}
           cookiePolicy={'single_host_origin'}
