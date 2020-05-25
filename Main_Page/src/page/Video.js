@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class Video extends Component {
   render() {
@@ -7,10 +7,10 @@ export default class Video extends Component {
       <div
         className="video"
         style={{
-          marginBottom: '90px',
-          marginRight: '400px',
-          marginLeft: '400px',
-          borderBottom: '2px solid grey',
+          marginBottom: "90px",
+          marginRight: "400px",
+          marginLeft: "400px",
+          borderBottom: "2px solid grey",
         }}
       >
         <img className="thumbnail-img" width="200px" src={thumbnail} />
