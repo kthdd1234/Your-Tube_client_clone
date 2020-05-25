@@ -1,23 +1,28 @@
-import React from 'react';
+import React from "react";
+import VideoList from "../page/VideoList";
+import logo from "../logo.png";
+import { searchVideo } from "../SearchVideo";
+import { withRouter } from "react-router-dom";
 
-import VideoList from '../page/VideoList';
-import logo from '../logo.png';
-import { searchVideo } from '../SearchVideo';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchKeyword: '',
-      YouTubeData: '',
+      searchKeyword: "",
+      YouTubeData: "",
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSearchData = this.handleSearchData.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       YouTubeData: nextProps.YouTubeVideos,
     });
+  }
+  handleLogout() {
+    this.props.history.push("/login");
   }
   handleInputValue(e) {
     e.preventDefault();
@@ -40,16 +45,28 @@ class MainPage extends React.Component {
 
   render() {
     const { YouTubeData } = this.state;
-    console.log('Receive Server Data: ', YouTubeData);
+    console.log("Receive Server Data: ", YouTubeData);
     return (
       <div>
+        <button
+          style={{
+            float: "right",
+            padding: "10px",
+            margin: "10px",
+            borderRadius: "7px",
+            backgroundColor: "orange",
+          }}
+          onClick={this.handleLogout}
+        >
+          로그아웃
+        </button>
         <center>
           <h1>
             <img
               src={logo}
               width="35px"
               style={{
-                paddingRight: '5px',
+                paddingRight: "5px",
               }}
             />
             YourTube
@@ -61,24 +78,24 @@ class MainPage extends React.Component {
           >
             <input
               style={{
-                width: '400px',
-                height: '20px',
-                margin: '5px',
-                borderRadius: '22px',
-                fontSize: '12px',
+                width: "400px",
+                height: "20px",
+                margin: "5px",
+                borderRadius: "22px",
+                fontSize: "12px",
               }}
               placeholder="찾고 싶은 영상의 제목이나 단어를 입력하세요"
               onChange={this.handleInputValue}
             ></input>
             <button
               style={{
-                width: '40px',
-                height: '22px',
-                padding: '2px',
-                borderRadius: '7px',
-                backgroundColor: '#f4511e',
-                color: 'white',
-                transition: '0.4s',
+                width: "40px",
+                height: "22px",
+                padding: "2px",
+                borderRadius: "7px",
+                backgroundColor: "#f4511e",
+                color: "white",
+                transition: "0.4s",
               }}
               onClick={this.handleSearchData}
             >
@@ -87,11 +104,10 @@ class MainPage extends React.Component {
           </form>
         </center>
         <div className="videoList" style={{}}>
-          {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ''}
+          {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ""}
         </div>
       </div>
     );
   }
 }
-
-export default MainPage;
+export default withRouter(MainPage);
