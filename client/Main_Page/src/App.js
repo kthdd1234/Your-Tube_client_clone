@@ -30,7 +30,7 @@ class App extends React.Component {
             }
           )
           .then((res) => {
-            console.log(res);
+            console.log(res.data);
             let YouTubeVideos = [];
             for (let video of res.data) {
               const { id, title, description, channelId, thumbnail } = video;

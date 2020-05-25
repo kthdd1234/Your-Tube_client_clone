@@ -9,7 +9,7 @@ class MainPage extends React.Component {
     super(props);
 
     this.state = {
-      searchKeyword: "",
+      searchKeyword: "", // 흰수염
       YouTubeData: "",
     };
     this.handleInputValue = this.handleInputValue.bind(this);
@@ -43,7 +43,6 @@ class MainPage extends React.Component {
 
   render() {
     const { YouTubeData } = this.state;
-    console.log("Receive Server Data: ", YouTubeData);
     return (
       <div>
         <center>

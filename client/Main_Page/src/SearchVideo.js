@@ -1,6 +1,6 @@
 export const searchVideo = (keyword, YouTubeData, callback) => {
   let filterVideos = [];
-  keyword = keyword.replace(/(\s*)/g, "");
+  keyword = keyword.replace(/(\s*)/g, ""); //
 
   for (const video of YouTubeData) {
     const { title, description, channelId } = video;
@@ -28,6 +28,6 @@ export const searchVideo = (keyword, YouTubeData, callback) => {
   }
   filterVideos = deleteSameData(filterVideos);
 
-  console.log(filterVideos);
+  console.log("문자열에 공백을 제거하여 필터링 한 데이터: ", filterVideos);
   return callback(filterVideos);
 };
