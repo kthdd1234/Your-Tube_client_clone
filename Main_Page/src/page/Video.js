@@ -13,7 +13,7 @@ export default class Video extends Component {
           borderBottom: '2px solid grey',
         }}
       >
-        <img className="thumbnail-img" width="50px" src={thumbnail} />
+        <img className="thumbnail-img" width="200px" src={thumbnail} />
         <h3 className="title">제목: {title}</h3>
         <p className="channelId">채널Id: {channelId}</p>
         <p className="description">설명: {description}</p>

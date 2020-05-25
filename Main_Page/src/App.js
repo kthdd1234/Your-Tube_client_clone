@@ -1,19 +1,26 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import LogIn from './page/LogIn';
 import MainPage from './page/MainPage';
 import axios from 'axios';
+import Oauth from './page/LogIn';
 // import axios from "axios";
+
+//폴더를 옮기고 npm start를 했을 때, 1. 구글 로그인 버튼이 있는 화면이 처음에 나옴 2. 구글 로그인을 하면 페이크 데이터가 있는 화면으로 전환.
 
 class App extends React.Component {
   state = {
-    isLogin: true,
+    isLogin: false,
     YouTubeVideos: null,
   };
+  handleSendPropsToLogin() {
+    this.setState({
+      isLogin: true,
+    });
+  }
   componentDidMount() {
-    axios
+    /*axios
       .post(
-        'http://ec2-54-180-117-42.ap-northeast-2.compute.amazonaws.com:4611/signin',
+        'http://ec2-3-34-48-225.ap-northeast-2.compute.amazonaws.com:4611/signin',
         {
           name: 'Kaido',
         }
@@ -24,7 +31,7 @@ class App extends React.Component {
       .then((data) => {
         axios
           .get(
-            'http://ec2-54-180-117-42.ap-northeast-2.compute.amazonaws.com:4611/list',
+            'http://ec2-3-34-48-225.ap-northeast-2.compute.amazonaws.com:4611/list',
             {
               headers: { 'x-api-key': data },
             }
@@ -48,7 +55,7 @@ class App extends React.Component {
               YouTubeVideos: YouTubeVideos,
             });
           });
-      });
+      });*/
   }
   render() {
     const { isLogin, YouTubeVideos } = this.state;
@@ -56,8 +63,15 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/login" render={() => <LogIn />}></Route>
-
+          <Route
+            exact
+            path="/login"
+            render={() => (
+              <Oauth
+                handleSendPropsToLogin={this.handleSendPropsToLogin.bind(this)}
+              />
+            )}
+          ></Route>
           <Route
             exact
             path="/mainPage"
