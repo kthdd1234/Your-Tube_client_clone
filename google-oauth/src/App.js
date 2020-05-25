@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import https from 'https';
 
@@ -20,7 +20,8 @@ export default class App extends Component {
     
     - client ID는 각자 것을 넣으면 됩니다.
       프로젝트 커밋 전에는 dotenv를 활용하여 외부로 노출되지 않게 하시고,
-      혹시 recast.ly때 썻던 API key가 있다면 삭제하는게 에러 가능성면에서 좋을 것 같습니다.
+      혹시 recast.ly때 썻던 API key가 있다면 삭제하는게 에러 가능성면에서 좋을 것 같습니다. 
+      //recast.ly때 썻던 API key 삭제 완료.
 
     - 서버로 로직이 이전되면, responseGoogle의 인자 response 객체의
       { error, accessToken, profileObj } 프로퍼티 값을
@@ -40,7 +41,7 @@ export default class App extends Component {
     - https ( https://nodejs.org/api/https.html ) 
     - how to promisify https ( https://stackoverflow.com/questions/38533580/nodejs-how-to-promisify-http-request-reject-got-called-two-times )
   */
-  responseGoogle = async ({error, accessToken, profileObj}) => {
+  responseGoogle = async ({ error, accessToken, profileObj }) => {
     if (error) {
       log(error);
       return;
@@ -50,7 +51,7 @@ export default class App extends Component {
     log('myChannelData: ', myChannelData);
     if (myChannelData.items) {
       // 'items' property exists ? request resolved : request rejected
-      const {id, contentDetails} = myChannelData.items[0];
+      const { id, contentDetails } = myChannelData.items[0];
       const channelId = id;
       const likePlaylistId = contentDetails.relatedPlaylists.likes;
       log('channelId: ', channelId);
@@ -95,14 +96,14 @@ export default class App extends Component {
     return (
       <div>
         <GoogleLogin
-          type='button'
-          buttonText='Login'
-          clientId='' // your client ID
+          type="button"
+          buttonText="Login"
+          clientId="396916863595-7g6vt4t2sscr1vbppmt0sr43pst8jjcj.apps.googleusercontent.com" // your client ID
           onSuccess={this.responseGoogle}
           onFailure={this.responseGoogle}
           cookiePolicy={'single_host_origin'}
-          scope='https://www.googleapis.com/auth/youtube'
-          accessType='offline'
+          scope="https://www.googleapis.com/auth/youtube"
+          accessType="offline"
         />
       </div>
     );
