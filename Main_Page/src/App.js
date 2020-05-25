@@ -6,6 +6,7 @@ import Oauth from './page/LogIn';
 
 //폴더를 옮기고 npm start를 했을 때, 1. 구글 로그인 버튼이 있는 화면이 처음에 나옴 2. 구글 로그인을 하면 페이크 데이터가 있는 화면으로 전환.
 //더 이상의 node_module은 없다. google-ouath도. DS_Store도 없다.
+//DS_store를 없애기 위한 3차 시도.
 class App extends React.Component {
   state = {
     isLogin: false,
