@@ -1,9 +1,10 @@
 import React from 'react';
 import VideoList from '../page/VideoList';
-//import logo from "../logo.png";
 import { searchVideo } from '../SearchVideo';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import Modal from '../page/Modal';
+import Header from './Header';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
@@ -11,11 +12,15 @@ class MainPage extends React.Component {
     this.state = {
       searchKeyword: '',
       YouTubeData: '',
+      modalOpen: false,
+      darkMode: false,
     };
 
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSearchData = this.handleSearchData.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleModalButtonClick = this.handleModalButtonClick.bind(this);
+    this.handleClickDarkMode = this.handleClickDarkMode.bind(this);
   }
   componentDidMount() {
     axios
@@ -63,6 +68,17 @@ class MainPage extends React.Component {
   //     YouTubeData: nextProps.YouTubeVideos,
   //   });
   // }
+  handleClickDarkMode() {
+    this.setState((preState) => ({
+      darkMode: !preState.darkMode,
+    }));
+  }
+
+  handleModalButtonClick() {
+    this.setState((preState) => ({
+      modalOpen: !preState.modalOpen,
+    }));
+  }
   handleLogout() {
     this.props.history.push('/login');
   }
@@ -86,36 +102,13 @@ class MainPage extends React.Component {
   }
 
   render() {
-    const { YouTubeData } = this.state;
+    const { YouTubeData, modalOpen, darkMode } = this.state;
 
     console.log('Receive Server Data: ', YouTubeData);
     return (
-      <div>
-        <button
-          style={{
-            float: 'right',
-            padding: '10px',
-            margin: '10px',
-            borderRadius: '7px',
-            backgroundColor: 'orange',
-          }}
-          onClick={this.handleLogout}
-        >
-          로그아웃
-        </button>
+      <div className={darkMode ? 'mainPage dark' : 'mainPage light'}>
         <center>
-          <h1>
-            {/**
-            <img
-              src={logo}
-              width="35px"
-              style={{
-                paddingRight: "5px",
-              }}
-            />
-            */}
-            YourTube
-          </h1>
+          <Header handleModalButtonClick={this.handleModalButtonClick} />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -147,10 +140,16 @@ class MainPage extends React.Component {
               검색
             </button>
           </form>
+          <div className="videoList" style={{}}>
+            {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ''}
+          </div>
         </center>
-        <div className="videoList" style={{}}>
-          {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ''}
-        </div>
+        <Modal
+          modalOpen={modalOpen}
+          handleLogout={this.handleLogout}
+          modalClose={this.handleModalButtonClick}
+          handleDarkMode={this.handleClickDarkMode}
+        />
       </div>
     );
   }

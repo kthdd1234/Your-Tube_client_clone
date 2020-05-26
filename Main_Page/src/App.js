@@ -1,7 +1,7 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import MainPage from './page/MainPage';
-import Oauth from './page/LogIn';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import MainPage from "./page/MainPage";
+import Oauth from "./page/LogIn";
 // import axios from "axios";
 
 //폴더를 옮기고 npm start를 했을 때, 1. 구글 로그인 버튼이 있는 화면이 처음에 나옴 2. 구글 로그인을 하면 페이크 데이터가 있는 화면으로 전환.
@@ -9,7 +9,7 @@ import Oauth from './page/LogIn';
 //DS_store를 없애기 위한 3차 시도.
 class App extends React.Component {
   state = {
-    isLogin: false,
+    isLogin: true,
   };
   handleSendPropsToLogin() {
     this.setState({
