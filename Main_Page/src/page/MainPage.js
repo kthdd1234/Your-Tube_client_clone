@@ -1,16 +1,16 @@
-import React from "react";
-import VideoList from "../page/VideoList";
+import React from 'react';
+import VideoList from '../page/VideoList';
 //import logo from "../logo.png";
-import { searchVideo } from "../SearchVideo";
-import { withRouter } from "react-router-dom";
-import axios from "axios";
+import { searchVideo } from '../SearchVideo';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchKeyword: "",
-      YouTubeData: "",
+      searchKeyword: '',
+      YouTubeData: '',
     };
 
     this.handleInputValue = this.handleInputValue.bind(this);
@@ -20,7 +20,7 @@ class MainPage extends React.Component {
   componentDidMount() {
     axios
       .post(
-        "http://ec2-3-34-48-225.ap-northeast-2.compute.amazonaws.com:4611/signin",
+        'http://ec2-3-34-130-32.ap-northeast-2.compute.amazonaws.com:4611/signin',
         {
           id: 1,
         }
@@ -31,9 +31,9 @@ class MainPage extends React.Component {
       .then((data) => {
         axios
           .get(
-            "http://ec2-3-34-48-225.ap-northeast-2.compute.amazonaws.com:4611/list",
+            'http://ec2-3-34-130-32.ap-northeast-2.compute.amazonaws.com:4611/list',
             {
-              headers: { "x-api-key": data },
+              headers: { 'x-api-key': data },
             }
           )
           .then((res) => {
@@ -64,7 +64,7 @@ class MainPage extends React.Component {
   //   });
   // }
   handleLogout() {
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   }
   handleInputValue(e) {
     e.preventDefault();
@@ -88,16 +88,16 @@ class MainPage extends React.Component {
   render() {
     const { YouTubeData } = this.state;
 
-    console.log("Receive Server Data: ", YouTubeData);
+    console.log('Receive Server Data: ', YouTubeData);
     return (
       <div>
         <button
           style={{
-            float: "right",
-            padding: "10px",
-            margin: "10px",
-            borderRadius: "7px",
-            backgroundColor: "orange",
+            float: 'right',
+            padding: '10px',
+            margin: '10px',
+            borderRadius: '7px',
+            backgroundColor: 'orange',
           }}
           onClick={this.handleLogout}
         >
@@ -123,24 +123,24 @@ class MainPage extends React.Component {
           >
             <input
               style={{
-                width: "400px",
-                height: "20px",
-                margin: "5px",
-                borderRadius: "22px",
-                fontSize: "12px",
+                width: '400px',
+                height: '20px',
+                margin: '5px',
+                borderRadius: '22px',
+                fontSize: '12px',
               }}
               placeholder="찾고 싶은 영상의 제목이나 단어를 입력하세요"
               onChange={this.handleInputValue}
             ></input>
             <button
               style={{
-                width: "40px",
-                height: "22px",
-                padding: "2px",
-                borderRadius: "7px",
-                backgroundColor: "#f4511e",
-                color: "white",
-                transition: "0.4s",
+                width: '40px',
+                height: '22px',
+                padding: '2px',
+                borderRadius: '7px',
+                backgroundColor: '#f4511e',
+                color: 'white',
+                transition: '0.4s',
               }}
               onClick={this.handleSearchData}
             >
@@ -149,7 +149,7 @@ class MainPage extends React.Component {
           </form>
         </center>
         <div className="videoList" style={{}}>
-          {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ""}
+          {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ''}
         </div>
       </div>
     );
