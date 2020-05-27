@@ -1,17 +1,17 @@
-import React from "react";
-import VideoList from "../page/VideoList";
-import { searchVideo } from "../SearchVideo";
-import { withRouter } from "react-router-dom";
-import axios from "axios";
-import Modal from "../page/Modal";
-import Header from "./Header";
+import React from 'react';
+import VideoList from '../page/VideoList';
+import { searchVideo } from '../SearchVideo';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+import Modal from '../page/Modal';
+import Header from './Header';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchKeyword: "",
-      YouTubeData: "",
+      searchKeyword: '',
+      YouTubeData: '',
       modalOpen: false,
       darkMode: false,
     };
@@ -25,7 +25,7 @@ class MainPage extends React.Component {
   componentDidMount() {
     axios
       .post(
-        "http://ec2-3-34-130-32.ap-northeast-2.compute.amazonaws.com:4611/signin",
+        'http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/signin',
         {
           id: 1,
         }
@@ -36,9 +36,9 @@ class MainPage extends React.Component {
       .then((data) => {
         axios
           .get(
-            "http://ec2-3-34-130-32.ap-northeast-2.compute.amazonaws.com:4611/list",
+            'http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/list',
             {
-              headers: { "x-api-key": data },
+              headers: { 'x-api-key': data },
             }
           )
           .then((res) => {
@@ -80,7 +80,7 @@ class MainPage extends React.Component {
     }));
   }
   handleLogout() {
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   }
   handleInputValue(e) {
     e.preventDefault();
@@ -104,9 +104,9 @@ class MainPage extends React.Component {
   render() {
     const { YouTubeData, modalOpen, darkMode } = this.state;
 
-    console.log("Receive Server Data: ", YouTubeData);
+    console.log('Receive Server Data: ', YouTubeData);
     return (
-      <div className={darkMode ? "mainPage dark" : "mainPage light"}>
+      <div className={darkMode ? 'mainPage dark' : 'mainPage light'}>
         <center>
           <Header handleModalButtonClick={this.handleModalButtonClick} />
           <form
@@ -116,24 +116,24 @@ class MainPage extends React.Component {
           >
             <input
               style={{
-                width: "400px",
-                height: "20px",
-                margin: "5px",
-                borderRadius: "22px",
-                fontSize: "12px",
+                width: '400px',
+                height: '20px',
+                margin: '5px',
+                borderRadius: '22px',
+                fontSize: '12px',
               }}
               placeholder="찾고 싶은 영상의 제목이나 단어를 입력하세요"
               onChange={this.handleInputValue}
             ></input>
             <button
               style={{
-                width: "40px",
-                height: "22px",
-                padding: "2px",
-                borderRadius: "7px",
-                backgroundColor: "#f4511e",
-                color: "white",
-                transition: "0.4s",
+                width: '40px',
+                height: '22px',
+                padding: '2px',
+                borderRadius: '7px',
+                backgroundColor: '#f4511e',
+                color: 'white',
+                transition: '0.4s',
               }}
               onClick={this.handleSearchData}
             >
@@ -141,7 +141,7 @@ class MainPage extends React.Component {
             </button>
           </form>
           <div className="videoList" style={{}}>
-            {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ""}
+            {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ''}
           </div>
         </center>
         <Modal
