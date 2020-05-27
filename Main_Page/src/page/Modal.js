@@ -4,27 +4,16 @@ export default class Modal extends Component {
   render() {
     return (
       <div className={this.props.modalOpen ? "modal Open" : "modal"}>
-        <div className="sidebar">
+        <div className="modal-Close" onClick={this.props.modalClose}></div>
+        <div className={this.props.darkMode ? "sidebar darkMode" : "sidebar"}>
           <button
-            style={{
-              fontSize: "25px",
-              float: "right",
-              color: "gray",
-              background: "none",
-              border: "none",
-            }}
+            className={this.props.darkMode ? "buttonX darkMode" : "buttonX"}
             onClick={this.props.modalClose}
           >
-            &times;
+            &times; {/*  &times; === x  */}
           </button>
           <h3>
-            <img
-              src={logo}
-              width="15px"
-              style={{
-                paddingRight: "5px",
-              }}
-            />
+            <img src={logo} alt="YoutubeLogo" className="ModalLogo" />
             YourTube
           </h3>
 
@@ -41,24 +30,13 @@ export default class Modal extends Component {
                 type="checkbox"
                 onChange={this.props.handleDarkMode}
               ></input>
-              <span>다크모드</span>
+              <span>어두운 테마 사용</span>
             </label>
           </fieldset>
 
           <hr />
           <center>
-            <button
-              style={{
-                paddingTop: "10px",
-                paddingBottom: "10px",
-                paddingLeft: "30px",
-                paddingRight: "30px",
-                borderRadius: "7px",
-                backgroundColor: "rgb(223, 208, 208)",
-                fontWeight: "bolder",
-              }}
-              onClick={this.props.handleLogout}
-            >
+            <button className="LogoutButton" onClick={this.props.handleLogout}>
               로그아웃
             </button>
           </center>

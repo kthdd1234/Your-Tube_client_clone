@@ -1,10 +1,10 @@
 import React from "react";
 import VideoList from "../page/VideoList";
-import { searchVideo } from "../SearchVideo";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import Modal from "../page/Modal";
 import Header from "./Header";
+import VideoPlayer from "./VideoPlayer";
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +14,7 @@ class MainPage extends React.Component {
       YouTubeData: "",
       modalOpen: false,
       darkMode: false,
+      clickVideo: null,
     };
 
     this.handleInputValue = this.handleInputValue.bind(this);
@@ -21,11 +22,12 @@ class MainPage extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.handleModalButtonClick = this.handleModalButtonClick.bind(this);
     this.handleClickDarkMode = this.handleClickDarkMode.bind(this);
+    this.hadleClickVideoPlayer = this.hadleClickVideoPlayer.bind(this);
   }
   componentDidMount() {
     axios
       .post(
-        "http://ec2-3-34-130-32.ap-northeast-2.compute.amazonaws.com:4611/signin",
+        "http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/signin",
         {
           id: 1,
         }
@@ -36,42 +38,30 @@ class MainPage extends React.Component {
       .then((data) => {
         axios
           .get(
-            "http://ec2-3-34-130-32.ap-northeast-2.compute.amazonaws.com:4611/list",
+            "http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/list",
             {
               headers: { "x-api-key": data },
             }
           )
           .then((res) => {
             console.log(res.data);
-            let YouTubeData = [];
-            for (let video of res.data) {
-              const { id, title, description, channelId, thumbnail } = video;
-              const userData = {
-                id: id,
-                thumbnail: thumbnail,
-                title: title,
-                description: description,
-                channelId: channelId,
-              };
-              YouTubeData.push(userData);
-            }
-
             this.setState({
-              YouTubeData: YouTubeData,
+              YouTubeData: res.data,
             });
           });
       });
   }
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   console.log(nextProps);
-  //   this.setState({
-  //     YouTubeData: nextProps.YouTubeVideos,
-  //   });
-  // }
+
   handleClickDarkMode() {
     this.setState((preState) => ({
       darkMode: !preState.darkMode,
     }));
+  }
+
+  hadleClickVideoPlayer(video) {
+    this.setState({
+      clickVideo: video,
+    });
   }
 
   handleModalButtonClick() {
@@ -91,64 +81,60 @@ class MainPage extends React.Component {
   }
 
   handleSearchData(e) {
-    const { searchKeyword } = this.state;
-    const { YouTubeVideos } = this.props;
-
-    searchVideo(searchKeyword, YouTubeVideos, (filterVideos) =>
-      this.setState({
-        YouTubeData: filterVideos,
-      })
-    );
+    // const { searchKeyword } = this.state;
   }
 
   render() {
-    const { YouTubeData, modalOpen, darkMode } = this.state;
+    const { YouTubeData, modalOpen, darkMode, clickVideo } = this.state;
 
     console.log("Receive Server Data: ", YouTubeData);
     return (
       <div className={darkMode ? "mainPage dark" : "mainPage light"}>
         <center>
-          <Header handleModalButtonClick={this.handleModalButtonClick} />
+          <Header
+            handleModalButtonClick={this.handleModalButtonClick}
+            darkMode={darkMode}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
             <input
-              style={{
-                width: "400px",
-                height: "20px",
-                margin: "5px",
-                borderRadius: "22px",
-                fontSize: "12px",
-              }}
+              className={darkMode ? "SearchtBar darkMode" : "SearchtBar"}
               placeholder="찾고 싶은 영상의 제목이나 단어를 입력하세요"
               onChange={this.handleInputValue}
             ></input>
             <button
-              style={{
-                width: "40px",
-                height: "22px",
-                padding: "2px",
-                borderRadius: "7px",
-                backgroundColor: "#f4511e",
-                color: "white",
-                transition: "0.4s",
-              }}
+              className={darkMode ? "SearchtButton darkMode" : "SearchtButton"}
               onClick={this.handleSearchData}
             >
               검색
             </button>
           </form>
-          <div className="videoList" style={{}}>
-            {YouTubeData ? <VideoList YouTubeData={YouTubeData} /> : ""}
-          </div>
+          {clickVideo ? (
+            <VideoPlayer clickVideo={clickVideo} darkMode={darkMode} />
+          ) : (
+            ""
+          )}
         </center>
+        <div className="videoList">
+          {YouTubeData ? (
+            <VideoList
+              YouTubeData={YouTubeData}
+              darkMode={darkMode}
+              hadleClickVideoPlayer={this.hadleClickVideoPlayer}
+            />
+          ) : (
+            ""
+          )}
+        </div>
         <Modal
           modalOpen={modalOpen}
           handleLogout={this.handleLogout}
           modalClose={this.handleModalButtonClick}
           handleDarkMode={this.handleClickDarkMode}
+          darkMode={darkMode}
         />
       </div>
     );

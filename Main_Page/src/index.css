@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,6 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
@@ -20,10 +24,90 @@ code {
   background: #333333;
 }
 
-.video-list-media {
+.SearchtBar {
+  width: 400px;
+  height: 20px;
+  margin: 5px;
+  border-radius: 22px;
+  font-size: 12px;
+}
+
+.SearchtBar.darkMode {
+  background: black;
+  color: white;
+}
+
+.SearchtButton {
+  width: 40px;
+  height: 22px;
+  padding: 2px;
+  border-radius: 7px;
+  background-color: #f4511e;
+  color: white;
+  transition: 0.4s;
+}
+
+.SearchtButton.darkMode {
+  background: #666;
+}
+
+.modalButton {
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+  float: right;
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-weight: bolder;
+}
+
+.modalButton.darkMode {
+  color: white;
+}
+
+.HeaderLogo {
+  width: 35px;
+  padding-right: 5px;
+}
+
+.YourTube {
+  padding-top: 25px;
+  padding-bottom: 10px;
+  font-size: 29px;
+}
+
+.YourTube.darkMode {
+  color: white;
+}
+
+.media {
+  display: flex;
+}
+
+.video-list {
   margin: 30px;
 
-  text-align: center;
+  padding: 8px;
+  border: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  background-color: whitesmoke;
+}
+
+.video-list.darkMode {
+  background: #666;
+  color: white;
+}
+
+.video {
+  font-size: 16px;
+  padding: 8px;
+}
+
+.video.darkMode {
+  background: #333;
+  color: white;
 }
 
 .modal {
@@ -40,6 +124,14 @@ code {
   visibility: visible;
 }
 
+.modal-Close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
 .modal .sidebar {
   position: absolute;
   background-color: #fff;
@@ -52,6 +144,39 @@ code {
   transform: translateX(350px);
   padding: 20px;
   transition: transform 0.6s;
+  background: whitesmoke;
+}
+
+.buttonX {
+  font-size: 25px;
+  float: right;
+  color: gray;
+  background: none;
+  border: none;
+}
+
+.buttonX.darkMode {
+  color: white;
+}
+
+.LogoutButton {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bolder;
+}
+
+.ModalLogo {
+  width: 15px;
+  padding-right: 5px;
+}
+
+.modal .sidebar.darkMode {
+  background: #333333;
+  color: white;
 }
 
 .modal.Open .sidebar {
