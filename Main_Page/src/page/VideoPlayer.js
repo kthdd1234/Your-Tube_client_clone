@@ -19,15 +19,7 @@ export default class VideoPlayer extends Component {
             src={`https://www.youtube.com/embed/${videoId}`}
             allowFullScreen
           ></iframe> */}
-          <img
-            className="thumbnails"
-            src={thumbnail}
-            width="200px"
-            style={{
-              marginTop: "30px",
-            }}
-            alt="thumbnails"
-          ></img>
+          <img className="thumbnails" src={thumbnail} alt="thumbnails"></img>
           <h2>제목: {title}</h2>
           <div>채널: {channelId}</div>
           <div>설명: {description}</div>

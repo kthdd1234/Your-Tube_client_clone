@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from "../page/Modal";
 import Header from "./Header";
 import VideoPlayer from "./VideoPlayer";
+
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
