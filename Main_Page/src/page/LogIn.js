@@ -46,7 +46,7 @@ class Oauth extends React.Component {
             className="button"
             type="button"
             buttonText="Sign in with Google"
-            clientId="378242754412-19sv1la59k4s4krsq3koggliu94lkk84.apps.googleusercontent.com" //client ID는 config.js라는 파일(폴더명도 동일) 안에 있음.
+            clientId="378242754412-19sv1la59k4s4krsq3koggliu94lkk84.apps.googleusercontent.com" //client ID는 config.js라는 폴더 안의 동명의 파일 안에 있음.
             onSuccess={this.handleAuthSuccess.bind(this)}
             onFailure={this.handleAuthFailure}
             cookiePolicy={'single_host_origin'}
@@ -56,7 +56,8 @@ class Oauth extends React.Component {
             accessType="offline" // to get access_token & refresh_token together
             // isSignedIn? // if you needed
           />
-          <p className="comment">What do you like recently?</p>
+          <p className="comment">This is YourTube.</p>
+          <p className="comment2">What did you Like recently?</p>
         </div>
       </div>
     );
