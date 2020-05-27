@@ -3,6 +3,11 @@
   src: url('./poppins/Poppins-Regular.ttf');
 }
 
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('./poppins/Poppins-Bold.ttf');
+}
+
 .container {
   height: 720px;
   width: 100%;
@@ -13,6 +18,7 @@
 .s4 {
   height: 100%;
   width: 100%;
+  /*여기서 반투명 레이어를 씌워서 자극을 완화했다. 한가지 주목할 점은 youtube글자의 검은색으로 반투명 레이어를 씌우니 글자에는 영향이 가지 않고 배경에만 영향이 갔다. 새로운 기법을 터득했다. */
   -webkit-backdrop-filter: opacity(0.9) drop-shadow(0 0 0 black);
   filter: opacity(0.9) drop-shadow(0 0 0 black);
 }
@@ -33,12 +39,22 @@
 }
 
 .comment {
-  margin-top: 40%;
+  margin-top: 30%;
   width: 100%;
-  font-family: Poppins-Regular;
-  font-size: 30px;
+  font-family: Poppins-Bold;
+  font-size: 45px;
   color: #333333;
   line-height: 1.2;
+  text-align: center;
+}
+
+.comment2 {
+  margin-top: 10%;
+  width: 100%;
+  font-family: Poppins-Regular;
+  font-size: 20px;
+  color: #333333;
+  line-height: 1;
   text-align: center;
 }
 
