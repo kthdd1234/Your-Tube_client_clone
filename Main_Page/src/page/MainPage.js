@@ -25,7 +25,7 @@ class MainPage extends React.Component {
   componentDidMount() {
     axios
       .post(
-        'http://ec2-3-34-130-32.ap-northeast-2.compute.amazonaws.com:4611/signin',
+        'http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/signin',
         {
           id: 1,
         }
@@ -36,7 +36,7 @@ class MainPage extends React.Component {
       .then((data) => {
         axios
           .get(
-            'http://ec2-3-34-130-32.ap-northeast-2.compute.amazonaws.com:4611/list',
+            'http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/list',
             {
               headers: { 'x-api-key': data },
             }
