@@ -5,6 +5,7 @@ import axios from 'axios';
 import Modal from '../page/Modal';
 import Header from './Header';
 import VideoPlayer from './VideoPlayer';
+import SearchVar from './SearchVar';
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class MainPage extends React.Component {
   componentDidMount() {
     axios
       .post(
-        'http://ec2-54-180-121-14.ap-northeast-2.compute.amazonaws.com:4611/signin',
+        'http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/signin',
 
         {
           id: 1,
@@ -40,7 +41,7 @@ class MainPage extends React.Component {
       .then((data) => {
         axios
           .get(
-            'http://ec2-54-180-121-14.ap-northeast-2.compute.amazonaws.com:4611/list',
+            'http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/list',
 
             {
               headers: { 'x-api-key': data },
@@ -98,23 +99,11 @@ class MainPage extends React.Component {
             handleModalButtonClick={this.handleModalButtonClick}
             darkMode={darkMode}
           />
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <input
-              className={darkMode ? 'SearchtBar darkMode' : 'SearchtBar'}
-              placeholder="찾고 싶은 영상의 제목이나 단어를 입력하세요"
-              onChange={this.handleInputValue}
-            ></input>
-            <button
-              className={darkMode ? 'SearchtButton darkMode' : 'SearchtButton'}
-              onClick={this.handleSearchData}
-            >
-              검색
-            </button>
-          </form>
+          <SearchVar
+            darkMode={darkMode}
+            handleInputValue={this.handleInputValue}
+            handleSearchData={this.handleSearchData}
+          />
 
           {clickVideo ? (
             <VideoPlayer clickVideo={clickVideo} darkMode={darkMode} />
