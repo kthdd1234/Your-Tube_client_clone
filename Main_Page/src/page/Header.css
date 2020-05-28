@@ -1,0 +1,33 @@
+@font-face {
+  font-family: Roboto-Regular;
+  src: url('./youtube/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: Roboto-Thin;
+  src: url('./youtube/Roboto-Thin.ttf');
+}
+
+.HeaderLogo {
+  float: left;
+  position: absolute;
+  left: 25%;
+  width: 50px;
+  margin-top: 3%;
+}
+
+.Logo {
+  position: relative;
+  left: 29%;
+  margin-top: 2.8%;
+  font-family: Roboto-Regular;
+  width: 60px;
+}
+
+.modalButton {
+  position: relative;
+  right: 20%;
+  margin-top: -5.5%;
+  font-size: 20pt;
+  font-family: Roboto-Thin;
+}

@@ -1,14 +1,25 @@
 .contents {
-  width: 900px;
-  height: 350px;
+  width: 780px;
+  height: 250px;
+  background-color: whitesmoke;
+  margin-left: 40%;
 }
 
 .thumbnail-img {
   float: left;
+  position: absolute;
+  left: 25%;
 }
 
 .textdata {
-  width: 500px;
+  width: 400px;
   float: right;
-  margin-top: -2.5%;
+  margin-top: -2%;
+  position: relative;
+  margin-right: 3%;
+}
+
+.whosid {
+  position: relative;
+  left: 25%;
 }
