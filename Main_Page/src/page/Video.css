@@ -1,0 +1,14 @@
+.contents {
+  width: 900px;
+  height: 350px;
+}
+
+.thumbnail-img {
+  float: left;
+}
+
+.textdata {
+  width: 500px;
+  float: right;
+  margin-top: -2.5%;
+}
