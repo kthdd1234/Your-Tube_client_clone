@@ -1,19 +1,21 @@
-import React from 'react';
-import VideoList from '../page/VideoList';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
-import Modal from '../page/Modal';
-import Header from './Header';
-import VideoPlayer from './VideoPlayer';
-import SearchVar from './SearchVar';
+
+import React from "react";
+import VideoList from "../page/VideoList";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
+import Modal from "../page/Modal";
+import Header from "./Header";
+import VideoPlayer from "./VideoPlayer";
+import SearchVar from "./SearchVar";
+
 
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchKeyword: '',
-      YouTubeData: '',
+      searchKeyword: "",
+      YouTubeData: "",
       modalOpen: false,
       darkMode: false,
       clickVideo: null,
@@ -25,11 +27,13 @@ class MainPage extends React.Component {
     this.handleModalButtonClick = this.handleModalButtonClick.bind(this);
     this.handleClickDarkMode = this.handleClickDarkMode.bind(this);
     this.hadleClickVideoPlayer = this.hadleClickVideoPlayer.bind(this);
+    this.handleRemoveVideo = this.handleRemoveVideo.bind(this);
   }
   componentDidMount() {
     axios
       .post(
-        'http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/signin',
+
+        "http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/signin",
 
         {
           id: 1,
@@ -41,10 +45,12 @@ class MainPage extends React.Component {
       .then((data) => {
         axios
           .get(
-            'http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/list',
+
+            "http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/list",
+
 
             {
-              headers: { 'x-api-key': data },
+              headers: { "x-api-key": data },
             }
           )
           .then((res) => {
@@ -68,13 +74,19 @@ class MainPage extends React.Component {
     });
   }
 
+  handleRemoveVideo() {
+    this.setState({
+      clickVideo: null,
+    });
+  }
+
   handleModalButtonClick() {
     this.setState((preState) => ({
       modalOpen: !preState.modalOpen,
     }));
   }
   handleLogout() {
-    this.props.history.push('/login');
+    this.props.history.push("/login");
   }
   handleInputValue(e) {
     e.preventDefault();
@@ -84,16 +96,24 @@ class MainPage extends React.Component {
     });
   }
 
-  handleSearchData(e) {
-    // const { searchKeyword } = this.state;
+  handleSearchData() {
+    const { searchKeyword } = this.state;
+
+    axios
+      .get(
+        `http://110.14.118.28:9200/rdbms_sync_idx/_search?q=${searchKeyword}`
+      )
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   render() {
     const { YouTubeData, modalOpen, darkMode, clickVideo } = this.state;
 
-    console.log('Receive Server Data: ', YouTubeData);
+    console.log("Receive Server Data: ", YouTubeData);
     return (
-      <div className={darkMode ? 'mainPage dark' : 'mainPage light'}>
+      <div className={darkMode ? "mainPage dark" : "mainPage light"}>
         <center>
           <Header
             handleModalButtonClick={this.handleModalButtonClick}
@@ -106,7 +126,11 @@ class MainPage extends React.Component {
           />
 
           {clickVideo ? (
-            <VideoPlayer clickVideo={clickVideo} darkMode={darkMode} />
+            <VideoPlayer
+              clickVideo={clickVideo}
+              darkMode={darkMode}
+              handleRemoveVideo={this.handleRemoveVideo}
+            />
           ) : (
             ''
           )}

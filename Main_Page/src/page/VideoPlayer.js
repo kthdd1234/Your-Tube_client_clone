@@ -8,6 +8,16 @@ export default class VideoPlayer extends Component {
       <div
         className={this.props.darkMdoe ? 'VideoPlayer darkMode' : 'VideoPlayer'}
       >
+        <div>
+          <button
+            onClick={this.props.handleRemoveVideo}
+            style={{
+              float: "right",
+            }}
+          >
+            &times;
+          </button>
+        </div>
         <div className="">
           <iframe
             src={`https://www.youtube.com/embed/${videoId}`}

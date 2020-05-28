@@ -25,14 +25,3 @@ export default class VideoList extends Component {
     );
   }
 }
-
-// import React from "react";
-// import Video from "../page/Video";
-// const VideoList = (props) => {
-//   <div className="video-list media">
-//     {props.fakeData.map((video) => {
-//       <Video video={video} />;
-//     })}
-//   </div>;
-// };
-// export default VideoList;
