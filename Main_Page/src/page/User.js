@@ -6,6 +6,7 @@ import Settings from './Settings';
 import Header from './Header';
 import SearchBar from './SearchBar';
 // import VideoPlayer from './VideoPlayer';
+axios.defaults.withCredentials = true;
 
 class User extends Component {
   constructor(props) {
@@ -40,8 +41,18 @@ class User extends Component {
   };
   handleKeywordUpdate = (value) => {
     this.setState({keyword: value}, () => {
-      // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
       console.log('keyword changed');
+      axios
+        .post('http://localhost:4611/resource/search', {
+          keyword: this.state.keyword,
+        })
+        .then((body) => {
+          console.log(body);
+          this.setState({videos: body.data});
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
   };
 
@@ -68,55 +79,3 @@ class User extends Component {
   }
 }
 export default withRouter(User);
-
-// this.handleInputValue = this.handleInputValue.bind(this);
-// this.handleSearchData = this.handleSearchData.bind(this);
-// this.handleLogout = this.handleLogout.bind(this);
-// this.handleModalButtonClick = this.handleModalButtonClick.bind(this);
-// this.handleClickDarkMode = this.handleClickDarkMode.bind(this);
-// this.hadleClickVideoPlayer = this.hadleClickVideoPlayer.bind(this);
-// this.handleRemoveVideo = this.handleRemoveVideo.bind(this);
-
-// handleClickDarkMode() {
-//   this.setState((preState) => ({
-//     darkMode: !preState.darkMode,
-//   }));
-// }
-
-// hadleClickVideoPlayer(video) {
-//   this.setState({
-//     clickVideo: video,
-//   });
-// }
-
-// handleRemoveVideo() {
-//   this.setState({
-//     clickVideo: null,
-//   });
-// }
-
-// handleModalButtonClick() {
-//   this.setState((preState) => ({
-//     modalOpen: !preState.modalOpen,
-//   }));
-// }
-// handleLogout() {
-//   this.props.history.push('/login');
-// }
-// handleInputValue(e) {
-//   e.preventDefault();
-//   const {value} = e.target;
-//   this.setState({
-//     searchKeyword: value,
-//   });
-// }
-
-// handleSearchData() {
-//   const {searchKeyword} = this.state;
-
-//   axios
-//     .get(`http://110.14.118.28:9200/rdbms_sync_idx/_search?q=${searchKeyword}`)
-//     .then((data) => {
-//       console.log(data);
-//     });
-// }
