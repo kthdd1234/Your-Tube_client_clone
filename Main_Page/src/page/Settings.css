@@ -1,0 +1,122 @@
+.dark {
+  color: white;
+  background: #333333;
+}
+
+.show {
+  visibility: visible;
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.settings {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+  overflow-x: hidden;
+}
+
+.settings.show {
+  visibility: visible;
+}
+
+.settings .sidebar {
+  position: absolute;
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  transform: translateX(350px);
+  padding: 20px;
+  transition: transform 0.6s;
+  background: whitesmoke;
+}
+
+.settings.show .sidebar {
+  transform: translateX(0);
+}
+
+.x-button {
+  font-size: 25px;
+  float: right;
+  color: gray;
+  background: none;
+  border: none;
+}
+
+.logout-button {
+  font-size: 16px;
+  width: 80%;
+  height: 50px;
+  border-radius: 8px;
+  background: white;
+  outline: none;
+  margin: 0 auto;
+}
+
+.settings_profile {
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.settings_profile_image {
+  width: 50px;
+  height: 50px;
+  margin-right: 16px;
+}
+
+.settings_profile_image > img {
+  width: 100%;
+  border-radius: 25px;
+}
+
+.settings_profile_text {
+  width: 50%;
+  height: auto;
+}
+
+.settings_profile_name {
+  font-size: 18px;
+  margin: 0;
+}
+
+.settings_profile_email {
+  font-size: 12px;
+  margin: 0;
+}
+
+.settings_title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.settings_title_logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.settings_title_logo > img {
+  width: 100%;
+}
+
+.settings_title_text {
+  font-size: 16px;
+}
