@@ -1,4 +1,4 @@
-import React, { Component } from "react"; //
+import React, { Component } from 'react'; //
 
 export default class VideoPlayer extends Component {
   render() {
@@ -6,7 +6,7 @@ export default class VideoPlayer extends Component {
 
     return (
       <div
-        className={this.props.darkMdoe ? "VideoPlayer darkMode" : "VideoPlayer"}
+        className={this.props.darkMdoe ? 'VideoPlayer darkMode' : 'VideoPlayer'}
       >
         <div>
           <button

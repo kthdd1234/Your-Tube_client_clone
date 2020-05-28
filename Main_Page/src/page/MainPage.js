@@ -1,3 +1,4 @@
+
 import React from "react";
 import VideoList from "../page/VideoList";
 import { withRouter } from "react-router-dom";
@@ -6,6 +7,7 @@ import Modal from "../page/Modal";
 import Header from "./Header";
 import VideoPlayer from "./VideoPlayer";
 import SearchVar from "./SearchVar";
+
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class MainPage extends React.Component {
   componentDidMount() {
     axios
       .post(
+
         "http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/signin",
 
         {
@@ -42,7 +45,9 @@ class MainPage extends React.Component {
       .then((data) => {
         axios
           .get(
+
             "http://ec2-3-34-122-219.ap-northeast-2.compute.amazonaws.com:4611/list",
+
 
             {
               headers: { "x-api-key": data },
@@ -119,6 +124,7 @@ class MainPage extends React.Component {
             handleInputValue={this.handleInputValue}
             handleSearchData={this.handleSearchData}
           />
+
           {clickVideo ? (
             <VideoPlayer
               clickVideo={clickVideo}
@@ -126,7 +132,7 @@ class MainPage extends React.Component {
               handleRemoveVideo={this.handleRemoveVideo}
             />
           ) : (
-            ""
+            ''
           )}
         </center>
         <div className="videoList">
@@ -137,7 +143,7 @@ class MainPage extends React.Component {
               hadleClickVideoPlayer={this.hadleClickVideoPlayer}
             />
           ) : (
-            ""
+            ''
           )}
         </div>
         <Modal

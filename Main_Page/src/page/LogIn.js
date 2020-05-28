@@ -16,18 +16,17 @@ class Oauth extends React.Component {
     console.log(googleResponse);
     const { code } = googleResponse;
     // Send request to server with auth_code into body
-    // axios
-    //   .post("http://localhost:3000/auth", { authCode: code })
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.props.handleSendPropsToLogin();
-    //     //return window.location.href('/'); // 리액트 라우터 구현 후, this.props.history.push('/유저페이지')로 변경하세요
-    //     //맨날 브랜치 만드는거 까먹음. 귀찮음.
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     return;
-    //   });
+    axios
+      .post('http://localhost:3000/auth/login', { authCode: code })
+      .then((res) => {
+        console.log(res);
+        this.props.handleSendPropsToLogin();
+        //return window.location.href('/'); // 리액트 라우터 구현 후, this.props.history.push('/유저페이지')로 변경하세요
+      })
+      .catch((err) => {
+        console.log(err);
+        return;
+      });
     this.props.handleSendPropsToLogin();
     this.props.history.push('/mainPage');
   }
