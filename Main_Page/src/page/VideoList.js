@@ -1,27 +1,21 @@
-import React, { Component } from 'react';
-import Video from '../page/Video';
+import React from 'react';
+import Video from './Video';
 
-export default class VideoList extends Component {
-  render() {
-    return (
-      <div
-        className={this.props.darkMode ? 'video-list darkMode' : 'video-list'}
-      >
-        <h3> (유튜브 아이디)님의 좋아요 동영상 리스트입니다.</h3>
-        <div className="media">
-          <ul>
-            {/*비디오 세로 배치*/}
-            {this.props.YouTubeData.map((video) => (
-              <Video
-                key={video.id}
-                video={video}
-                darkMode={this.props.darkMode}
-                hadleClickVideoPlayer={this.props.hadleClickVideoPlayer}
-              />
-            ))}
-          </ul>
-        </div>
+const VideoList = ({videos, profile}) => {
+  return (
+    <>
+      <h3> {profile.name}님의 좋아요 동영상 리스트입니다.</h3>
+      <div className='media'>
+        <ul>
+          {videos.map((video) => (
+            <Video key={video.id} video={video} />
+          ))}
+        </ul>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
+
+export default VideoList;
+
+// <div className={this.props.darkMode ? 'video-list darkMode' : 'video-list'}>

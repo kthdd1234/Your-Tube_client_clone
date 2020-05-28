@@ -1,53 +1,50 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import MainPage from "./page/MainPage";
-import Oauth from "./page/LogIn";
-// import axios from "axios";
+import React, {Component} from 'react';
+import {Switch, Route, Redirect} from 'react-router-dom';
+import Login from './page/Login';
+import User from './page/User';
 
-//폴더를 옮기고 npm start를 했을 때, 1. 구글 로그인 버튼이 있는 화면이 처음에 나옴 2. 구글 로그인을 하면 페이크 데이터가 있는 화면으로 전환.
-//더 이상의 node_module은 없다. google-ouath도. DS_Store도 없다.
-//DS_store를 없애기 위한 3차 시도.
-class App extends React.Component {
+class App extends Component {
   state = {
-    isLogin: true,
+    isLogin: false,
+    profile: {},
   };
-  handleSendPropsToLogin() {
-    this.setState({
-      isLogin: true,
-    });
-  }
+  handleLoginToggle = () => {
+    this.setState({isLogin: !this.state.isLogin});
+  };
+  handleProfileUpdate = (data) => {
+    this.setState({profile: data});
+  };
   render() {
-    const { isLogin } = this.state;
+    const {isLogin, profile} = this.state;
 
     return (
       <div>
         <Switch>
           <Route
             exact
-            path="/login"
+            path='/login'
             render={() => (
-              <Oauth
-                handleSendPropsToLogin={this.handleSendPropsToLogin.bind(this)}
+              <Login
+                handleLoginToggle={this.handleLoginToggle}
+                handleProfileUpdate={this.handleProfileUpdate}
               />
-            )}
-          ></Route>
+            )}></Route>
           <Route
             exact
-            path="/mainPage"
+            path='/user'
             render={() => {
               if (isLogin) {
-                return <MainPage isLogin={isLogin} />;
+                return <User handleLoginToggle={this.handleLoginToggle} profile={profile} />;
               }
-              return <Redirect to="/login" />;
-            }}
-          ></Route>
+              return <Redirect to='/login' />;
+            }}></Route>
           <Route
-            path="/"
+            path='/'
             render={() => {
               if (isLogin) {
-                return <Redirect to="/mainPage" />;
+                return <Redirect to='/user' />;
               }
-              return <Redirect to="/login" />;
+              return <Redirect to='/login' />;
             }}
           />
         </Switch>
