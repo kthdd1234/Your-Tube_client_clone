@@ -1,11 +1,11 @@
 @font-face {
-  font-family: Poppins-Regular;
-  src: url('./poppins/Poppins-Regular.ttf');
+  font-family: Roboto-Black;
+  src: url('./youtube/Roboto-Black.ttf');
 }
 
 @font-face {
-  font-family: Poppins-Bold;
-  src: url('./poppins/Poppins-Bold.ttf');
+  font-family: Roboto-Thin;
+  src: url('./youtube/Roboto-Thin.ttf');
 }
 
 .container {
@@ -41,8 +41,8 @@
 .comment {
   margin-top: 40%;
   width: 100%;
-  font-family: Poppins-Bold;
-  font-size: 45px;
+  font-family: Roboto-Thin;
+  font-size: 50px;
   color: #333333;
   line-height: 1.2;
   text-align: center;
@@ -51,7 +51,7 @@
 .comment2 {
   margin-top: 5%;
   width: 100%;
-  font-family: Poppins-Regular;
+  font-family: Roboto-Black;
   font-size: 20px;
   color: #333333;
   line-height: 1;

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from './page/Login';
 import User from './page/User';
 
@@ -9,42 +9,49 @@ class App extends Component {
     profile: {},
   };
   handleLoginToggle = () => {
-    this.setState({isLogin: !this.state.isLogin});
+    this.setState({ isLogin: !this.state.isLogin });
   };
   handleProfileUpdate = (data) => {
-    this.setState({profile: data});
+    this.setState({ profile: data });
   };
   render() {
-    const {isLogin, profile} = this.state;
+    const { isLogin, profile } = this.state;
 
     return (
       <div>
         <Switch>
           <Route
             exact
-            path='/login'
+            path="/login"
             render={() => (
               <Login
                 handleLoginToggle={this.handleLoginToggle}
                 handleProfileUpdate={this.handleProfileUpdate}
               />
-            )}></Route>
+            )}
+          ></Route>
           <Route
             exact
-            path='/user'
+            path="/user"
             render={() => {
               if (isLogin) {
-                return <User handleLoginToggle={this.handleLoginToggle} profile={profile} />;
+                return (
+                  <User
+                    handleLoginToggle={this.handleLoginToggle}
+                    profile={profile}
+                  />
+                );
               }
-              return <Redirect to='/login' />;
-            }}></Route>
+              return <Redirect to="/login" />;
+            }}
+          ></Route>
           <Route
-            path='/'
+            path="/"
             render={() => {
               if (isLogin) {
-                return <Redirect to='/user' />;
+                return <Redirect to="/user" />;
               }
-              return <Redirect to='/login' />;
+              return <Redirect to="/login" />;
             }}
           />
         </Switch>

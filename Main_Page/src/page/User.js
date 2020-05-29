@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import VideoList from './VideoList';
 import Settings from './Settings';
@@ -24,7 +24,7 @@ class User extends Component {
       .get('http://localhost:4611/resource')
       .then((body) => {
         console.log(body);
-        this.setState({videos: body.data});
+        this.setState({ videos: body.data });
       })
       .catch((err) => {
         console.log(err);
@@ -34,13 +34,14 @@ class User extends Component {
     console.log('componentDidUpdate!');
   }
   handleDarkModeToggle = () => {
-    this.setState({isDarkMode: !this.state.isDarkMode});
+    this.setState({ isDarkMode: !this.state.isDarkMode });
   };
   handleSettingsToggle = () => {
-    this.setState({isSettingsOpen: !this.state.isSettingsOpen});
+    this.setState({ isSettingsOpen: !this.state.isSettingsOpen });
   };
   handleKeywordUpdate = (value) => {
-    this.setState({keyword: value}, () => {
+    this.setState({ keyword: value }, () => {
+      // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
       console.log('keyword changed');
       axios
         .post('http://localhost:4611/resource/search', {
@@ -57,14 +58,16 @@ class User extends Component {
   };
 
   render() {
-    const {videos, isSettingsOpen, isDarkMode} = this.state;
+    const { videos, isSettingsOpen, isDarkMode } = this.state;
 
     return (
       <div>
         <Header handleSettingsToggle={this.handleSettingsToggle} />
         <SearchBar handleKeywordUpdate={this.handleKeywordUpdate} />
-        <div className='videoList'>
-          {videos.length ? <VideoList videos={videos} profile={this.props.profile} /> : null}
+        <div className="videoList">
+          {videos.length ? (
+            <VideoList videos={videos} profile={this.props.profile} />
+          ) : null}
         </div>
         <Settings
           profile={this.props.profile}
