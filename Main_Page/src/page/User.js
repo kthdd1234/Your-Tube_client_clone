@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +6,6 @@ import Settings from "./Settings";
 import Header from "./Header";
 import SearchBar from "./SearchBar";
 import VideoPlayer from "./VideoPlayer";
-
 
 axios.defaults.withCredentials = true;
 
@@ -38,6 +36,12 @@ class User extends Component {
     console.log("componentDidUpdate!");
   }
 
+  handleVideoPlayer = (video) => {
+    this.setState({
+      currentVideo: video,
+    });
+  };
+
   handleToggleHeader = () => {
     const { storage } = this.props;
     console.log(storage);
@@ -62,20 +66,18 @@ class User extends Component {
     this.setState({ keyword: value }, () => {
       // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
 
-
-      console.log('keyword changed');
+      console.log("keyword changed");
       axios
-        .post('http://localhost:4611/resource/search', {
+        .post("http://localhost:4611/resource/search", {
           keyword: this.state.keyword,
         })
         .then((body) => {
           console.log(body);
-          this.setState({videos: body.data});
+          this.setState({ videos: body.data });
         })
         .catch((err) => {
           console.log(err);
         });
-
     });
   };
 
