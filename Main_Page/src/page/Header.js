@@ -1,19 +1,23 @@
 import React from 'react';
-import logo from '../logo.png';
-import './Header.css';
+import {withRouter} from 'react-router-dom';
+import logo from '../images/yourtube-small.png';
 
-const Header = ({ handleSettingsToggle }) => {
+const Header = (props) => {
   return (
     <div>
-      <div className="YourTube">
-        <img src={logo} alt="YoutubeLogo" className="HeaderLogo" />
-        <h3 className="Logo">YourTube</h3>
+      <div
+        className='YourTube'
+        onClick={() => {
+          props.history.push('/user');
+        }}>
+        <img src={logo} alt='logo' className='HeaderLogo' />
+        YourTube
       </div>
-      <button className="modalButton" onClick={handleSettingsToggle}>
+      <button className='modalButton' onClick={props.handleSettingsToggle}>
         &#8801; Settings
       </button>
     </div>
   );
 };
 
-export default Header;
+export default withRouter(Header);
