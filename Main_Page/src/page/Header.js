@@ -1,10 +1,10 @@
-import React from 'react';
-import logo from '../logo.png';
-import './Header.css';
+import React from "react";
+import logo from "../logo.png";
+import "./Header.css";
 
-const Header = ({ handleSettingsToggle }) => {
+const Header = ({ handleSettingsToggle, handleToggleHeader }) => {
   return (
-    <div>
+    <div onClick={handleToggleHeader}>
       <div className="YourTube">
         <img src={logo} alt="YoutubeLogo" className="HeaderLogo" />
         <h3 className="Logo">YourTube</h3>

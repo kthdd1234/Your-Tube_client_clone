@@ -1,16 +1,16 @@
-import React, { Component } from 'react'; //
+import React, { Component } from "react"; //
 
 export default class VideoPlayer extends Component {
   render() {
-    const { videoId, title, description, channelId } = this.props.clickVideo;
+    const { videoId, title, description, channelId } = this.props.currentVideo;
 
     return (
       <div
-        className={this.props.darkMdoe ? 'VideoPlayer darkMode' : 'VideoPlayer'}
+        className={this.props.darkMdoe ? "VideoPlayer darkMode" : "VideoPlayer"}
       >
         <div>
           <button
-            onClick={this.props.handleRemoveVideo}
+            onClick={this.props.handleRemoveVideoPlayer}
             style={{
               float: "right",
             }}
