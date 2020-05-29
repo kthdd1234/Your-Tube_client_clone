@@ -1,17 +1,18 @@
+
 import React from 'react';
+
+import "./Header.css";
 import {withRouter} from 'react-router-dom';
 import logo from '../images/yourtube-small.png';
 
-const Header = (props) => {
+const Header = ({ handleSettingsToggle, handleToggleHeader }) => {
   return (
-    <div>
-      <div
-        className='YourTube'
-        onClick={() => {
+    <div onClick={handleToggleHeader}>
+      <div className="YourTube">
+        <img src={logo} alt="YoutubeLogo" className="HeaderLogo" onClick={() => {
           props.history.push('/user');
-        }}>
-        <img src={logo} alt='logo' className='HeaderLogo' />
-        YourTube
+        }}/>
+        <h3 className="Logo">YourTube</h3>
       </div>
       <button className='modalButton' onClick={props.handleSettingsToggle}>
         &#8801; Settings

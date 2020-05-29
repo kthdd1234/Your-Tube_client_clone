@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Login from './page/Login';
-import User from './page/User';
+import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Login from "./page/Login";
+import User from "./page/User";
 
 class App extends Component {
   state = {
     isLogin: false,
     profile: {},
+    storage: [],
   };
+
+  handleVideosSave = (videos) => {
+    this.setState({
+      storage: videos,
+    });
+  };
+
   handleLoginToggle = () => {
     this.setState({ isLogin: !this.state.isLogin });
   };
@@ -15,7 +23,7 @@ class App extends Component {
     this.setState({ profile: data });
   };
   render() {
-    const { isLogin, profile } = this.state;
+    const { isLogin, profile, storage } = this.state;
 
     return (
       <div>
@@ -39,6 +47,8 @@ class App extends Component {
                   <User
                     handleLoginToggle={this.handleLoginToggle}
                     profile={profile}
+                    handleVideosSave={this.handleVideosSave}
+                    storage={storage}
                   />
                 );
               }

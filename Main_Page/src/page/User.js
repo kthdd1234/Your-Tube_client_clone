@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
-import VideoList from './VideoList';
-import Settings from './Settings';
-import Header from './Header';
-import SearchBar from './SearchBar';
-// import VideoPlayer from './VideoPlayer';
+
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
+import VideoList from "./VideoList";
+import Settings from "./Settings";
+import Header from "./Header";
+import SearchBar from "./SearchBar";
+import VideoPlayer from "./VideoPlayer";
+
+
 axios.defaults.withCredentials = true;
 
 class User extends Component {
@@ -13,7 +16,7 @@ class User extends Component {
     super(props);
     this.state = {
       videos: [],
-      keyword: '',
+      keyword: "",
       currentVideo: {},
       isSettingsOpen: false,
       isDarkMode: false,
@@ -21,9 +24,10 @@ class User extends Component {
   }
   componentDidMount() {
     axios
-      .get('http://localhost:4611/resource')
+      .get("http://localhost:4611/resource")
       .then((body) => {
         console.log(body);
+        this.props.handleVideosSave(body.data);
         this.setState({ videos: body.data });
       })
       .catch((err) => {
@@ -31,8 +35,23 @@ class User extends Component {
       });
   }
   componentDidUpdate() {
-    console.log('componentDidUpdate!');
+    console.log("componentDidUpdate!");
   }
+
+  handleToggleHeader = () => {
+    const { storage } = this.props;
+    console.log(storage);
+    this.setState({
+      videos: storage,
+    });
+  };
+
+  handleRemoveVideoPlayer = () => {
+    this.setState({
+      currentVideo: {},
+    });
+  };
+
   handleDarkModeToggle = () => {
     this.setState({ isDarkMode: !this.state.isDarkMode });
   };
@@ -42,6 +61,8 @@ class User extends Component {
   handleKeywordUpdate = (value) => {
     this.setState({ keyword: value }, () => {
       // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
+
+
       console.log('keyword changed');
       axios
         .post('http://localhost:4611/resource/search', {
@@ -54,19 +75,35 @@ class User extends Component {
         .catch((err) => {
           console.log(err);
         });
+
     });
   };
 
   render() {
-    const { videos, isSettingsOpen, isDarkMode } = this.state;
+    const { videos, isSettingsOpen, isDarkMode, currentVideo } = this.state;
 
     return (
       <div>
-        <Header handleSettingsToggle={this.handleSettingsToggle} />
+        <Header
+          handleSettingsToggle={this.handleSettingsToggle}
+          handleToggleHeader={this.handleToggleHeader}
+        />
         <SearchBar handleKeywordUpdate={this.handleKeywordUpdate} />
+        {Object.keys(currentVideo).length ? (
+          <VideoPlayer
+            currentVideo={currentVideo}
+            handleRemoveVideoPlayer={this.handleRemoveVideoPlayer}
+          />
+        ) : (
+          ""
+        )}
         <div className="videoList">
           {videos.length ? (
-            <VideoList videos={videos} profile={this.props.profile} />
+            <VideoList
+              videos={videos}
+              profile={this.props.profile}
+              handleVideoPlayer={this.handleVideoPlayer}
+            />
           ) : null}
         </div>
         <Settings
